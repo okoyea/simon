@@ -2,10 +2,10 @@ define(['lodash'], function (_) {
   var Interactions = function () {
 
     this.clockwiseFlash = function() {
-      var $key1 = $('[data-id=' + 1 + ']');
-      var $key2 = $('[data-id=' + 2 + ']');
-      var $key3 = $('[data-id=' + 3 + ']');
-      var $key4 = $('[data-id=' + 4 + ']');
+      var $key1 = $('[data-id=1]');
+      var $key2 = $('[data-id=2]');
+      var $key3 = $('[data-id=3]');
+      var $key4 = $('[data-id=4]');
 
       $key1.addClass('pressed');
       setTimeout(function() {
@@ -51,9 +51,12 @@ define(['lodash'], function (_) {
     },
 
     this.showOverlay = function() {
-      $('.board').addClass('overlay');
-      $('button').show();
-      $('button').text('Try Again?');
+      var $button = $('button');
+      var $board = $('.board');
+
+      $board.addClass('overlay');
+      $button.show();
+      $button.text('Try Again?');
     }
   };
 
