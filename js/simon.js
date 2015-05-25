@@ -1,9 +1,18 @@
-define(['lodash'], function (_) {
+define(['lodash','interactions'], function (_, Interactions) {
   var Simon = function () {
-    this.initializeGame = function() {
-      $(".board").removeClass('overlay');
+
+    this.initialize = function() {
+      this.interactions = new Interactions();
+    },
+
+    this.setUpGame = function() {
       this.sequence = [];
       this.round = 1;
+    },
+
+    this.startGame = function() {
+      this.interactions.hideOverlay();
+      this.setUpGame();
       this.startRound();
     },
 
@@ -18,35 +27,14 @@ define(['lodash'], function (_) {
       var times = 1;
 
       if (this.round > 7) {
-        times = _.random(1,2)
+        times = _.random(1,2);
       }
 
       for(var i=0; i < times; i++) {
-        this.sequence.push(_.random(1,4))
+        this.sequence.push(_.random(1,4));
       }
 
       this.sequenceCopy = _.clone(this.sequence);
-    },
-
-    this.activate = function() {
-      var that = this;
-
-      $('[data-id]').on({
-        'click' : function(e) {
-          e.stopImmediatePropagation();
-          that.checkResults($(e.target).data('id'));
-        },
-        'mousedown' : function(e) {
-          that.playSound($(e.target).data('id'));
-          that.lightKeys($(e.target).data('id'));
-        }
-      });
-    },
-
-    this.deactivate = function() {
-      $('[data-id]')
-        .off('click')
-        .off('mousedown');
     },
 
     this.checkResults = function(id) {
@@ -63,11 +51,30 @@ define(['lodash'], function (_) {
     },
 
     this.endGame = function() {
-      this.playSound(5);
+      this.interactions.playSound(5);
       this.deactivate();
-      $('.board').addClass('overlay');
-      $('button').show();
-      $('button').text('Try Again?');
+      this.interactions.showOverlay();
+    },
+
+    this.activate = function() {
+      $('[data-id]').on({
+        'click' : $.proxy(function(e) {
+          e.stopImmediatePropagation();
+          var id = $(e.target).data('id')
+          this.checkResults(id);
+        }, this),
+        'mousedown' : $.proxy(function(e) {
+          var id = $(e.target).data('id');
+          this.interactions.playSound(id);
+          this.interactions.lightKeys(id);
+        }, this)
+      });
+    },
+
+    this.deactivate = function() {
+      $('[data-id]')
+        .off('click')
+        .off('mousedown');
     },
 
     this.playSequence = function() {
@@ -78,61 +85,17 @@ define(['lodash'], function (_) {
 
     this.play = function() {
       var i = 0;
-      var that = this;
-      var interval = setInterval(function() {
-        that.playSound(that.sequence[i]);
-        that.lightKeys(that.sequence[i]);
+
+      var interval = setInterval((function() {
+        this.interactions.playSound(this.sequence[i]);
+        this.interactions.lightKeys(this.sequence[i]);
         i++;
 
-        if (i >= that.sequence.length) {
+        if (i >= this.sequence.length) {
           clearInterval(interval);
         }
-      }, 600);
-    },
 
-    this.playSound = function(id) {
-      var audio = $('<audio autoplay></audio>');
-      audio.volume = 1.0;
-      audio.append('<source src="sounds/' + id + '.ogg" type="audio/ogg" />');
-      audio.append('<source src="sounds/' + id + '.mp3" type="audio/mp3" />');
-      $('[data-action=sound]').html(audio);
-    },
-
-    this.lightKeys = function(id) {
-      var $key = $('[data-id=' + id + ']')
-
-      $key.addClass('pressed');
-
-      window.setTimeout(function() {
-        $key.removeClass('pressed');
-      }, 300);
-    },
-
-    this.clockwiseFlash = function() {
-      var $key1 = $('[data-id=' + 1 + ']');
-      var $key2 = $('[data-id=' + 2 + ']');
-      var $key3 = $('[data-id=' + 3 + ']');
-      var $key4 = $('[data-id=' + 4 + ']');
-
-      $key1.addClass('pressed');
-      window.setTimeout(function() {
-        $key1.removeClass('pressed');
-      }, 300);
-
-      $key3.addClass('pressed');
-      window.setTimeout(function() {
-        $key3.removeClass('pressed');
-      }, 500);
-
-      $key4.addClass('pressed');
-      window.setTimeout(function() {
-        $key4.removeClass('pressed');
-      }, 700);
-
-      $key2.addClass('pressed');
-      window.setTimeout(function() {
-        $key2.removeClass('pressed');
-      }, 900);
+      }).bind(this), 600 );
     }
   };
 
