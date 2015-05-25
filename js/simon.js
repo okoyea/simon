@@ -50,9 +50,9 @@ define(['lodash'], function (_) {
     },
 
     this.checkResults = function(id) {
-      var alive = this.sequenceCopy.shift() == id
+      var alive = this.sequenceCopy.shift() === id
 
-      if (alive && (this.sequenceCopy.length == 0)) {
+      if (alive && (this.sequenceCopy.length === 0)) {
         this.round++;
         this.startRound();
       }
