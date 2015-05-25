@@ -13,6 +13,9 @@ require.config({
 require(['simon','interactions','jquery'], function(Simon, Interactions, $){
   var simon = new Simon();
   var interactions = new Interactions();
+  var $start = $('#start')
+  var $button = $('button')
+  var $board = $(".board")
   var interval;
 
   $(function() {
@@ -20,7 +23,7 @@ require(['simon','interactions','jquery'], function(Simon, Interactions, $){
     startUp();
   });
 
-  $('button').click(function() {
+  $button.click(function() {
     startGame();
   });
 
@@ -28,23 +31,22 @@ require(['simon','interactions','jquery'], function(Simon, Interactions, $){
     interactions.clockwiseFlash();
     interactions.playSound(6);
 
-    $('#start').hide();
+    $start.hide();
 
     interval = setInterval(function() {
       interactions.clockwiseFlash();
     }, 1700);
 
     setTimeout(function() {
-      $('#start').show()
+      $start.show()
     }, 4000)
   };
 
   function startGame() {
     clearInterval(interval);
-    $('#start').hide();
-    $(".board").removeClass('overlay');
+    $start.hide();
+    $board.removeClass('overlay');
 
     simon.startGame();
   };
-
 });
