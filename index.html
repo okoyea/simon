@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simon</title>
+    <link href='bower_components/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    <link href='css/styles.css' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div class='container'>
+      <div class='row'>
+        <div class='col-md-6'>
+          <div class='board'>
+            <ul>
+              <li class='slice blue' data-id='1'></li>
+              <li class='slice red' data-id='2'></li>
+              <li class='slice yellow' data-id='3'></li>
+              <li class='slice green' data-id='4'></li>
+            </ul>
+          </div>
+        </div>
+        <div class='col-md-6'>
+          <div class='controls'>
+            <h1 class='name'>Simon</h1>
+            <button id='start' class='start'>Start</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script data-main='js/main' src='node_modules/requirejs/require.js'></script>
+  </body>
+</html>
+
+

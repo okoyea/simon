@@ -1,0 +1,110 @@
+@import url('http://fonts.googleapis.com/css?family=Audiowide');
+
+body {
+  font-family: 'Courier New', serif;
+  color: #333;
+}
+
+.name {
+  font-family: 'Audiowide';
+  font-size: 60px;
+}
+
+.board {
+  background: #FFF;
+  position: relative;
+  width: 80%;
+  margin-top: 10%;
+}
+
+.slice {
+  opacity: 0.6;
+  -webkit-transition: opacity 200ms ease;
+  -moz-transition: opacity 200ms ease;
+  -ms-transition: opacity 200ms ease;
+  -o-transition: opacity 200ms ease;
+  transition: opacity 200ms ease;
+  -webkit-transition: border 200ms ease;
+  -moz-transition: border 200ms ease;
+  -ms-transition: border 200ms ease;
+  -o-transition: border 200ms ease;
+  transition: border 200ms ease;
+}
+
+.start {
+  width: 190px;
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+  -webkit-transition: color 300ms ease;
+  -moz-transition: color 300ms ease;
+  -ms-transition: color 300ms ease;
+  -o-transition: color 300ms ease;
+  transition: color 300ms ease;
+}
+
+.start:hover {
+  color: #FFF;
+  background-color: #333;
+}
+
+.slice.lit {
+  opacity: 1;
+}
+
+.red, .blue, .yellow, .green {
+  height: 600px;
+  -webkit-border-radius: 300px 300px 300px 300px;
+  border-radius: 300px 300px 300px 300px;
+  position: absolute;
+  text-indent: 10000px;
+}
+
+.blue {
+  background: blue;
+  clip: rect(0px, 600px, 300px, 300px);
+  width: 596px;
+}
+
+.red {
+  background: red;
+  clip: rect(0px, 300px, 300px, 0px);
+  width: 600px;
+}
+
+.yellow {
+  background: yellow;
+  clip: rect(300px, 300px, 600px, 0px);
+  width: 600px;
+}
+
+.green {
+  background: green;
+  clip: rect(300px,600px, 600px, 300px);
+  width: 596px;
+}
+
+.pressed {
+  opacity: 1;
+  border: 5px solid black;
+}
+
+.overlay {
+  background: #000;
+  opacity: 0.5;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2999;
+}
+
+.controls {
+  position: relative;
+  top: 300px;
+  text-align: center;
+}
+
+audio {
+  display:none;
+}
