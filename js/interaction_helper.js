@@ -47,16 +47,47 @@ define(['lodash'], function (_) {
     },
 
     this.hideOverlay = function() {
-      $(".board").removeClass('overlay');
+      $("#board").removeClass('overlay');
+    },
+
+    this.hideStartButton = function() {
+      $("#start").hide();
     },
 
     this.showOverlay = function() {
-      var $button = $('button');
-      var $board = $('.board');
+      var $startButton = $('#start');
+      var $board = $('#board');
 
       $board.addClass('overlay');
-      $button.show();
-      $button.text('Try Again?');
+      $startButton.show();
+      $startButton.text('Try Again?');
+    },
+
+    this.onPageLoad = function() {
+      var $startButton = $('#start')
+
+      this.clockwiseFlash();
+      this.playSound(6);
+
+      $startButton.hide();
+
+      this.interval = setInterval((function() {
+        this.clockwiseFlash();
+      }).bind(this), 1700 );
+
+      setTimeout(function() {
+        $startButton.show()
+      }, 4000)
+    },
+
+    this.onGameStart = function() {
+      this.clearSetInterval();
+      this.hideStartButton();
+      this.hideOverlay();
+    },
+
+    this.clearSetInterval = function() {
+      clearInterval(this.interval);
     }
   };
 

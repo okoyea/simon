@@ -1,18 +1,18 @@
-define(['lodash','interactions'], function (_, Interactions) {
+define(['lodash','interaction_helper'], function (_, Interactions) {
   var Simon = function () {
 
     this.initialize = function() {
       this.interactions = new Interactions();
     },
 
-    this.setUpGame = function() {
+    this.resetGame = function() {
       this.sequence = [];
       this.round = 1;
     },
 
     this.startGame = function() {
       this.interactions.hideOverlay();
-      this.setUpGame();
+      this.resetGame();
       this.startRound();
     },
 
@@ -41,8 +41,7 @@ define(['lodash','interactions'], function (_, Interactions) {
       var alive = this.sequenceCopy.shift() === id
 
       if (alive && (this.sequenceCopy.length === 0)) {
-        this.round++;
-        this.startRound();
+        this.nextRound();
       }
 
       if (!alive) {
@@ -54,6 +53,11 @@ define(['lodash','interactions'], function (_, Interactions) {
       this.interactions.playSound(5);
       this.deactivate();
       this.interactions.showOverlay();
+    },
+
+    this.nextRound = function() {
+      this.round++;
+      this.startRound();
     },
 
     this.activate = function() {
