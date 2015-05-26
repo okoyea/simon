@@ -84,7 +84,6 @@ define(['lodash','interaction_helper'], function (_, Interactions) {
     this.playSequence = function() {
       this.deactivate();
       this.play();
-      this.activate();
     },
 
     this.play = function() {
@@ -97,6 +96,7 @@ define(['lodash','interaction_helper'], function (_, Interactions) {
 
         if (i >= this.sequence.length) {
           clearInterval(interval);
+          this.activate();
         }
 
       }).bind(this), 600 );
