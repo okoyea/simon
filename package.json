@@ -1,20 +1,20 @@
 {
-  "name": "encoder-decoder",
+  "name": "simon",
   "version": "1.0.0",
-  "description": "This small app can take a signed integer and encode it by converting it into a 4-bit hex code. It can also decode a 4-bit hex code by converting it into an integer.",
+  "description": "The popular memory game",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/okoyea/encoder-decoder.git"
+    "url": "https://github.com/okoyea/simon.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/okoyea/encoder-decoder/issues"
+    "url": "https://github.com/okoyea/simon/issues"
   },
-  "homepage": "https://github.com/okoyea/encoder-decoder",
+  "homepage": "https://github.com/okoyea/simon",
   "dependencies": {
     "lodash": "^3.9.1",
     "requirejs": "^2.1.17"
